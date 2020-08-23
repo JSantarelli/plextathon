@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { PlexModule } from '@andes/plex';
 import { Plex } from '@andes/plex';
+import * as $ from 'jquery';
 
 // Components
 import { HomeComponent } from './home.component';

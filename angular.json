@@ -31,7 +31,8 @@
                             "src/styles.sass"
                         ],
                         "scripts": [
-                            "node_modules/intro.js/intro.js"
+                            "node_modules/intro.js/intro.js",
+                            "node_modules/jquery/dist/jquery.min.js"
                         ]
                     },
                     "configurations": {
@@ -88,7 +89,10 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": [],
+                        "scripts": [
+                            "../node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/intro.js/intro.js"
+                        ],
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"

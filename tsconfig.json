@@ -1,8 +1,9 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "skipLibCheck": true,
         "baseUrl": "./",
-    "downlevelIteration": true,
+        "downlevelIteration": true,
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
@@ -12,6 +13,9 @@
         "experimentalDecorators": true,
         "importHelpers": true,
         "target": "es2015",
+        "types": [
+            "node"
+        ],
         "typeRoots": [
             "node_modules/@types"
         ],
@@ -19,5 +23,17 @@
             "es2018",
             "dom"
         ]
-    }
+    },
+    "include": [
+        "./**/*.ts",
+        "../node_modules/@andes/**/*.ts",
+        "../node_modules/ng2-slugify/**/*.ts",
+    ],
+    "exclude": [
+        "../node_modules/@schematics/**/*.ts",
+        "../node_modules/karma/**/*.ts"
+    ],
+    "files": [
+        "node_modules/@andes/plex/index.ts"
+    ]
 }
