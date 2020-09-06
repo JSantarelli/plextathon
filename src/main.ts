@@ -1,12 +1,21 @@
+import './polyfills.ts';
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import * as bowser from 'bowser';
 
-if (environment.production) {
-  enableProdMode();
+// Check browser version
+if (!(bowser as any).check({ chrome: '54' }) || !(bowser as any).check({ firefox: '54' })) {
+    window.document.getElementById('incompatible-browser').style.display = 'block';
+    window.document.getElementById('preloader').style.display = 'none';
+} else {
+    // Enabled production mode
+    if (environment.production) {
+        enableProdMode();
+    }
+    // Start application
+    platformBrowserDynamic().bootstrapModule(AppModule);
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));

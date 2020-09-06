@@ -1,3 +1,13 @@
-<p>
-    home works!
-</p>
+<plex-layout main="8">
+    <plex-layout-main>
+        <p>vmsdmcdms</p>
+        <ng-container *ngFor="let app of apps">
+            <P>{{ app.nombre }}</P>
+            <P>{{ app.descripcion }}</P>
+            <P>{{ app.img }}</P>
+        </ng-container>
+    </plex-layout-main>
+    <plex-layout-sidebar>
+        <p>nkdnaslkz\</p>
+    </plex-layout-sidebar>
+</plex-layout>
