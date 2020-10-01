@@ -1,3 +1,77 @@
+# [5.15.0](https://github.com/andes/app/compare/v5.14.0...v5.15.0) (2020-09-30)
+
+
+### Bug Fixes
+
+* **citas:** Corrige consulta repetitiva a api ([#1915](https://github.com/andes/app/issues/1915)) ([a40a233](https://github.com/andes/app/commit/a40a233fe2b53d22234999462dcb818182ebb83d))
+* **huds:** error al visualizar prestaciones de un paciente inicialmente ([#1918](https://github.com/andes/app/issues/1918)) ([11fc741](https://github.com/andes/app/commit/11fc741b9fcc5cfaa60ef75a5df92b50168e1d41))
+
+
+### Features
+
+* **core:** check timezone ([#1925](https://github.com/andes/app/issues/1925)) ([f178ae0](https://github.com/andes/app/commit/f178ae0647f18e2d92b36543878d7486bf73c4d2))
+* **mapa-camas:** saca "otros" de razon de alta y motivo de bloqueo ([#1835](https://github.com/andes/app/issues/1835)) ([2ab630b](https://github.com/andes/app/commit/2ab630b0fbdc22cd115cd9e5cf2f14de41ab3c4b))
+* **mapa-camas:** virtual scroll en tabla de camas ([#1710](https://github.com/andes/app/issues/1710)) ([623650b](https://github.com/andes/app/commit/623650b8e6c6a913a7483bad62741f97f3c54828))
+* **rup:** flujo de datos al ejecutar un concepto ([#1900](https://github.com/andes/app/issues/1900)) ([245d163](https://github.com/andes/app/commit/245d1636f35ef02b6b0698790c58617d9d8f5099))
+
+# [5.14.0](https://github.com/andes/app/compare/v5.13.0...v5.14.0) (2020-09-23)
+
+
+### Bug Fixes
+
+* **mapa-camas:** handler null ubicacion ([#1916](https://github.com/andes/app/issues/1916)) ([a86b1e8](https://github.com/andes/app/commit/a86b1e80bab53678dde70fedfa7264c7e66e00e8))
+* **rup:** fix sinonimo components ([24a06b0](https://github.com/andes/app/commit/24a06b00bfa64c0314521c54e60078ec9d5cc92e))
+* **rup:** odontrograma no se podia usar como segungo registro ([#1909](https://github.com/andes/app/issues/1909)) ([1be48b8](https://github.com/andes/app/commit/1be48b86e97fa764c009ddafaede107206fdd52d))
+* **rup:** permitir ver y continuar prestación si el usuario no tiene acceso a huds ([#1911](https://github.com/andes/app/issues/1911)) ([4a590c4](https://github.com/andes/app/commit/4a590c4ff95de40b85ae0f5bcf3ee58bda81c335))
+* **TOP:** no se visualizaban  indicaciones de RUP ([#1919](https://github.com/andes/app/issues/1919)) ([ac32a00](https://github.com/andes/app/commit/ac32a0042cc88ee9e50a731a75cd23ec52b11326))
+
+
+### Features
+
+* **GDU:** actualiza control de permisos de GDU ([#1912](https://github.com/andes/app/issues/1912)) ([6ba3b06](https://github.com/andes/app/commit/6ba3b06fd740150f1e145266c3081d8084ee5f9d))
+* **huds:** change to /huds routes ([#1908](https://github.com/andes/app/issues/1908)) ([0ce0936](https://github.com/andes/app/commit/0ce093668ede5875b89241b50b26edd03261e11e))
+* **mapa-camas:** agrega UO origen al extra al hacer movimiento ([#1820](https://github.com/andes/app/issues/1820)) ([b963efc](https://github.com/andes/app/commit/b963efc3da208bcb5d97b65d78a014034f1f208f))
+* **mapa-camas:** renombra 'cambiar UO' a 'pase de UO' ([#1836](https://github.com/andes/app/issues/1836)) ([689045e](https://github.com/andes/app/commit/689045e9e8a2b0fb86e62ae58f28ab901aa06880))
+* **rup:** buscador mostrar fsn en los sinónimos ([#1896](https://github.com/andes/app/issues/1896)) ([4dda328](https://github.com/andes/app/commit/4dda328d8a0df3dffc99afa45fcd7ce516f41272))
+* **TOP:** observaciones al iniciar prestacion ([#1906](https://github.com/andes/app/issues/1906)) ([ac8343f](https://github.com/andes/app/commit/ac8343ffe9b6145868f56b6115fe99d4461dbaef))
+* **TOP:** refactor visual en busqueda de paciente ([#1913](https://github.com/andes/app/issues/1913)) ([2a4db01](https://github.com/andes/app/commit/2a4db01b9486a4549cdb9d8cc831a463d19476b6))
+
+# [5.13.0](https://github.com/andes/app/compare/v5.12.0...v5.13.0) (2020-09-16)
+
+
+### Bug Fixes
+
+* **GDU:** arregla sincro de permisos y perfiles ([#1887](https://github.com/andes/app/issues/1887)) ([fe8081d](https://github.com/andes/app/commit/fe8081d4a0db5652de9e67dcbcb243eca1eba07c))
+* **mpi:** ignorar y guardar paciente ([#1831](https://github.com/andes/app/issues/1831)) ([26887b6](https://github.com/andes/app/commit/26887b68dd85accd049cd1d343a8e2d7092cdb98))
+
+
+### Features
+
+* **informacion:** se agrega modulo visualizacion-informacion ([#1893](https://github.com/andes/app/issues/1893)) ([5e1c555](https://github.com/andes/app/commit/5e1c555a7162e26078f844a17e8323b9da26069a))
+* **plex:** v6.15.3 ([#1902](https://github.com/andes/app/issues/1902)) ([dce0fcb](https://github.com/andes/app/commit/dce0fcb4830457409703be4f918085a6bac2f917))
+
+# [5.12.0](https://github.com/andes/app/compare/v5.11.0...v5.12.0) (2020-09-09)
+
+
+### Bug Fixes
+
+* **huds:** muestra nombre correcto de concepto de solicitud ([#1797](https://github.com/andes/app/issues/1797)) ([3fd03a7](https://github.com/andes/app/commit/3fd03a78adae17e2f9f6d9fa3e3eb3f2f3c5b75b))
+* **mpi:** quita scroll-infinito de buscador y listado ([#1897](https://github.com/andes/app/issues/1897)) ([6a23730](https://github.com/andes/app/commit/6a23730526f73cac6c73beca0e10b60f916ec928))
+* **rup:** agrega required a ValorNumerico ([#1894](https://github.com/andes/app/issues/1894)) ([a6c42b9](https://github.com/andes/app/commit/a6c42b9c25cd3a31d4139ec702000815369ad10a))
+* **rup:** modifica ancho de listado de pacientes ([#1889](https://github.com/andes/app/issues/1889)) ([85efd7c](https://github.com/andes/app/commit/85efd7c5d4ed41f004e1df635cce4c9fa0159255))
+
+
+### Features
+
+* **core:** @andes/plex 6.15.0 ([#1892](https://github.com/andes/app/issues/1892)) ([14a647e](https://github.com/andes/app/commit/14a647e78a68d5136307caee457d82784f034cdb))
+* **core:** tipoPrestacion.id por tipoPrestacion.conceptId ([#1873](https://github.com/andes/app/issues/1873)) ([98c9cab](https://github.com/andes/app/commit/98c9cab658cbc91a39c0251d12377794a30bd43d))
+* **mapa-camas:** agregar y editar una nota en las camas ocupadas ([#1821](https://github.com/andes/app/issues/1821)) ([d2ab27d](https://github.com/andes/app/commit/d2ab27d153fd02e6a01db6396f5ff1294f1934ad))
+* **mapa-camas:** filtros distintos para fechas de ingreso y egreso ([#1774](https://github.com/andes/app/issues/1774)) ([aa25a33](https://github.com/andes/app/commit/aa25a334366657a068e8caa5e09d1e20bbcc112d))
+* **mapa-camas:** quita el hardcodeo de colores en el estado de servicio ([#1843](https://github.com/andes/app/issues/1843)) ([eff4cb9](https://github.com/andes/app/commit/eff4cb98827feb090ff928cf23708aadf83561bc))
+* **mpi:** Agrega boton 'editar datos' de un paciente ([#1888](https://github.com/andes/app/issues/1888)) ([154bc58](https://github.com/andes/app/commit/154bc58b040d0d94f1954a63f4a33d7fede55229))
+* **organizaciones:** configurar cuentas de email asociadas al efector ([#1862](https://github.com/andes/app/issues/1862)) ([db64b45](https://github.com/andes/app/commit/db64b4578a9fa2f6590d6e2f33844b054ffc0f5a))
+* **rup:** pto inicio lazy load pendientes ([#1728](https://github.com/andes/app/issues/1728)) ([7872654](https://github.com/andes/app/commit/78726545dd94639546961b429c9e058d3fa9745a))
+
 # [5.11.0](https://github.com/andes/app/compare/v5.10.0...v5.11.0) (2020-09-02)
 
 

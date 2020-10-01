@@ -1,13 +1,38 @@
 <plex-layout main="8">
     <plex-layout-main>
-        <p>vmsdmcdms</p>
-        <ng-container *ngFor="let app of apps">
-            <P>{{ app.nombre }}</P>
-            <P>{{ app.descripcion }}</P>
-            <P>{{ app.img }}</P>
-        </ng-container>
+        <plex-title titulo="calendario de agendas">
+            <plex-bool type="slide" [(ngModel)]="modelo.slide" label="Mostrar agendas sin turnos"></plex-bool>
+            <plex-bool type="slide" [(ngModel)]="modelo.slide" label="Mostrar agendas sin turnos"></plex-bool>
+        </plex-title>
+        <plex-wrapper>
+            <plex-select [(ngModel)]="modelo1.select" placeholder="Ingrese..." label="Titulo"></plex-select>
+            <plex-select [(ngModel)]="modelo2.select" placeholder="Ingrese..." label="Titulo"></plex-select>
+        </plex-wrapper>
+
+
+        <!-- Calendario -->
+        <plex-grid type="full" cols="4">
+            <plex-card align="center" type="default" *ngFor="let celda of calendario | slice:0:31">
+                <plex-badge type="success">{{ celda.turnos }}</plex-badge>
+                <!--<plex-badge type="warning">{{ celda.agendas }}</plex-badge>-->
+                <plex-label size="lg" titulo="{{ celda.fecha }}" subtitulo="">
+                </plex-label>
+                <plex-button type="warning" icon="pencil" size="sm"></plex-button>
+            </plex-card>
+        </plex-grid>
+
     </plex-layout-main>
-    <plex-layout-sidebar>
-        <p>nkdnaslkz\</p>
+    <plex-layout-sidebar type="invert">
+        <plex-title titulo="búsqueda de paciente" size="sm"></plex-title>
+        <plex-text [(ngModel)]="templateModel2" placeholder="Busque un paciente"></plex-text>
+        <section class="h-50 align-items-center" justify="center">
+            <plex-label size="xl" titulo="Buscá y seleccioná un paciente" subtitulo="Podrás ver detalles del registro"
+                        icon="zoom" direction="column"></plex-label>
+
+        </section>
+        <plex-title titulo="Turnos frecuentes" size="sm"></plex-title>
+
+        <router-outlet>
+        </router-outlet>
     </plex-layout-sidebar>
 </plex-layout>

@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AndesRunComponent } from './andes-run/andes-run.component';
 import { AndesMedsComponent } from './andes-meds/andes-meds.component';
 import { AndesTriageComponent } from './andes-triage/andes-triage.component';
+import { CitasComponent } from './citas/citas.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { AndesTriageComponent } from './andes-triage/andes-triage.component';
         HomeComponent,
         AndesRunComponent,
         AndesMedsComponent,
-        AndesTriageComponent
+        AndesTriageComponent,
+        CitasComponent
     ],
     imports: [
         BrowserModule,
