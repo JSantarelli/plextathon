@@ -1,0 +1,15 @@
+<p>calendario works!</p>
+<plex-card *ngFor="let agenda of agendas$ | async" class="" [selected]="selectedId === agenda.id">
+    <plex-label titulo="{{ agenda.id }}" subtitulo="{{ agenda.horaInicio }}">
+    </plex-label>
+
+    <plex-button type="info" size="sm" title="ver detalle" icon="eye" (click)="selected(agenda)">
+    </plex-button>
+    <plex-label *ngFor="let profesional of agenda.profesionales" titulo="{{ agenda.tipoPrestaciones }}"
+                subtitulo="Profesional: {{ profesional.apellido }}, {{ profesional.nombre }}">
+    </plex-label>
+    <plex-badge type="success">{{ agenda.estado }}</plex-badge>
+    <plex-badge *ngFor="let bloque of agenda.bloques" type="info">Pacientes
+        {{ bloque.restantesDelDia }}/{{ bloque.accesoDirectoDelDia }}
+    </plex-badge>
+</plex-card>

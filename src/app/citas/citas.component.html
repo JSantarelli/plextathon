@@ -1,1 +1,27 @@
-<p>citas works!</p>
+<plex-layout main="8">
+    <plex-layout-main>
+        <plex-title titulo="calendario de agendas">
+            <plex-bool type="slide" [(ngModel)]="modelo.slide" label="Mostrar agendas sin turnos"></plex-bool>
+            <plex-bool type="slide" [(ngModel)]="modelo.slide" label="Mostrar agendas sin turnos"></plex-bool>
+            <plex-button label="buscar paciente" size="sm" type="success" routerLink="/busqueda-paciente"></plex-button>
+            <plex-button label="buscar paciente" size="sm" type="success" routerLink="/confirmacion-turno">
+            </plex-button>
+            <plex-button label="buscar paciente" size="sm" type="success" (click)="goToBusqueda()"></plex-button>
+            <plex-button label="buscar paciente" size="sm" type="success" (click)="goToConfirm()"></plex-button>
+        </plex-title>
+        <plex-wrapper>
+            <plex-select [(ngModel)]="modelo1.select" placeholder="Ingrese..." label="Titulo"></plex-select>
+            <plex-select [(ngModel)]="modelo2.select" placeholder="Ingrese..." label="Titulo"></plex-select>
+        </plex-wrapper>
+
+
+        <!-- Calendario -->
+        <calendario>
+
+        </calendario>
+    </plex-layout-main>
+    <plex-layout-sidebar type="invert">
+        <router-outlet>
+        </router-outlet>
+    </plex-layout-sidebar>
+</plex-layout>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TriageService } from './servicios/triage.service';
+import { AgendaService } from './servicios/agenda.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -22,34 +22,7 @@ export class HomeComponent {
         selectMultiple: null
     };
 
-    apps = [
-        {
-            nombre: 'Triage',
-            descripcion: 'App para evaluar riesgo de vida del paciente',
-            img: 'link a imagen',
-            icono: 'hospital',
-            color: 'warning',
-            link: '/triage',
-        },
-        {
-            nombre: 'Meds',
-            descripcion: 'App para evaluar riesgo de vida del paciente',
-            img: 'link a imagen',
-            icono: 'hospital',
-            color: 'warning',
-            link: '/meds',
-        },
-        {
-            nombre: 'Run',
-            descripcion: 'App para evaluar riesgo de vida del paciente',
-            img: 'link a imagen',
-            icono: 'hospital',
-            color: 'warning',
-            link: '/run',
-        },
-    ]
-
-    constructor(private service: TriageService, private router: Router) {
+    constructor(private service: AgendaService, private router: Router) {
 
     }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TriageService } from './servicios/triage.service';
-import { Triage } from './modelos/triage';
+import { AgendaService } from './servicios/agenda.service';
+//import { Agenda } from './modelos/turnos/IAgenda';
 
 @Component({
     selector: 'app',
@@ -10,7 +10,7 @@ import { Triage } from './modelos/triage';
 export class AppComponent {
     title = 'plextathon';
 
-    constructor(private service: TriageService) {
+    constructor(private service: AgendaService) {
 
     }
 }

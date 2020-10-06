@@ -1,0 +1,49 @@
+<plex-title titulo="dar turno" size="sm"></plex-title>
+<ng-container *ngIf="agenda$ | async as agenda">
+
+    <!-- Agendas disponibles -->
+    <plex-grid type="auto" size="md" cols="3">
+        <ng-container *ngFor="let bloque of agenda.bloques" type="info">
+            <plex-card align="start" type="dark" size="sm" *ngFor="let prestacion of bloque.tipoPrestaciones"
+                       [selected]="bloque.selected" (click)="selectedBloque(bloque)">
+                <plex-badge type="warning">{{ bloque.cantidadTurnos }} / {{ bloque.restantesDelDia }}</plex-badge>
+                <plex-label size="md" direction="row" titulo="{{ agenda.horaInicio }}"
+                            subtitulo="{{ prestacion.nombre }}">
+                </plex-label>
+                <plex-button type="warning" label="modificar" size="sm"></plex-button>
+            </plex-card>
+        </ng-container>
+    </plex-grid>
+
+    <!-- Info paciente (agregar selectedPaciente)-->
+    <ng-container *ngFor="let bloque of agenda.bloques | slice:0:1" type="info">
+        <plex-detail *ngFor="let turno of bloque.turnos | slice:0:1" size="sm" direction="row">
+            <plex-badge size="xs">{{ agenda.id }}</plex-badge>
+            <plex-badge type="info" size="sm">{{ turno.paciente.sexo }}</plex-badge>
+            <img src="{{ turno.paciente.foto}}" alt="">
+            <div title>{{ turno.paciente.nombre }} {{ turno.paciente.apellido }}</div>
+            <plex-label size="sm" titulo="Obra social" subtitulo="{{ turno.paciente.obraSocial.nombre }}"></plex-label>
+            <plex-label size="sm" titulo="Telefono" subtitulo="{{ turno.paciente.telefono }}"></plex-label>
+            <plex-label size="sm" titulo="Telefono" subtitulo="{{ turno.paciente.telefono }}"></plex-label>
+            <plex-label size="sm" titulo="Telefono" subtitulo="{{ agenda.id }}"></plex-label>
+        </plex-detail>
+    </ng-container>
+
+    <!-- Info adicional -->
+    <plex-title titulo="información adicional" size="sm"></plex-title>
+    <plex-text [(ngModel)]="templateModel2" placeholder="Escriba el motivo por el cual paciente ha solicitado un turno">
+    </plex-text>
+
+    <!-- Horarios -->
+    <plex-title titulo="selección horario" size="sm"></plex-title>
+    <section class="h-25">
+        <plex-grid type="full" size="md" cols="3">
+            <plex-card align="center" type="dark" size="sm" *ngFor="let horario of horarios"
+                       [selected]="horario.selected" (click)="horario.selected = !horario.selected">
+                <plex-label size="md" direction="row" titulo="{{ horario.hora }}">
+                </plex-label>
+            </plex-card>
+        </plex-grid>
+    </section>
+
+</ng-container>

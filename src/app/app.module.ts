@@ -1,4 +1,5 @@
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { routing, appRoutingProviders } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,22 +11,25 @@ import * as $ from 'jquery';
 // Components
 import { HomeComponent } from './home.component';
 import { AppComponent } from './app.component';
-import { AndesRunComponent } from './andes-run/andes-run.component';
-import { AndesMedsComponent } from './andes-meds/andes-meds.component';
-import { AndesTriageComponent } from './andes-triage/andes-triage.component';
 import { CitasComponent } from './citas/citas.component';
+import { CalendarioComponent } from './citas/calendario/calendario.component';
+import { BusquedaPacienteComponent } from './citas/busqueda-paciente/busqueda-paciente.component';
+import { DacionTurnoComponent } from './citas/dacion-turno/dacion-turno.component';
+import { ConfirmacionTurnoComponent } from './citas/confirmacion-turno/confirmacion-turno.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        AndesRunComponent,
-        AndesMedsComponent,
-        AndesTriageComponent,
-        CitasComponent
+        CitasComponent,
+        CalendarioComponent,
+        BusquedaPacienteComponent,
+        DacionTurnoComponent,
+        ConfirmacionTurnoComponent
     ],
     imports: [
         BrowserModule,
+        RouterModule,
         FormsModule,
         PlexModule,
         routing,
