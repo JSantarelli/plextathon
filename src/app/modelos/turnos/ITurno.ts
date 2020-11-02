@@ -3,7 +3,7 @@ import { IObraSocial } from './../IObraSocial';
 import { IOrganizacion } from '../IOrganizacion';
 
 // TODO: Recordar actualizar Schema!
-export interface ITurno {
+export class ITurno {
     id: string;
     horaInicio: String;
     estado: string;
@@ -42,25 +42,25 @@ export interface ITurno {
     };
     carpetaEfectores?: [{
         organizacion: {
-            id: string,
+            id: string;
             nombre: string
         },
         nroCarpeta: string
     }];
     nota: string;
-    motivoSuspension: String,
-    avisoSuspension: String,
+    motivoSuspension: String;
+    avisoSuspension: String;
     diagnostico: {
-        codificaciones: [],
+        codificaciones: [];
     };
     estadoFacturacion: {
-        estado: String,
-        tipo: String,
-        numeroComprobante: String,
+        estado: String;
+        tipo: String;
+        numeroComprobante: String;
     }
-    auditable: Boolean,
-    emitidoPor: String,
-    fechaHoraDacion: String,
-    motivoConsulta: String,
-    horaAsistencia: String,
+    auditable: Boolean;
+    emitidoPor: String;
+    fechaHoraDacion: String;
+    motivoConsulta: String;
+    horaAsistencia: String;
 }

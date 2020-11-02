@@ -1,0 +1,15 @@
+plex-grid > 
+    // Override checkboxes
+    label {
+
+        width: 100%;
+        height: 80px;
+
+        &:hover, &:active {
+            mix-blend-mode: screen;
+        }
+
+        > input[type=radio] {
+            visibility: hidden;
+        }
+    }

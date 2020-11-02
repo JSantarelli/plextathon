@@ -1,30 +1,26 @@
+<!-- select paciente: refactorizar a plex-text  -->
 <plex-title titulo="búsqueda de paciente" size="sm"></plex-title>
-<plex-text [(ngModel)]="templateModel2" placeholder="Busque un paciente"></plex-text>
-<!--<section class="h-50 align-items-center" justify="center">
-    <plex-label size="xl" titulo="Buscá y seleccioná un paciente" subtitulo="Podrás ver detalles del registro"
-                icon="zoom" direction="column"></plex-label>
-</section>-->
 
-<!-- Listado resultados -->
-<ng-container *ngFor="let agenda of agendas$ | async">
-    <ng-container *ngFor="let bloque of agenda.bloques" type="info">
-        <plex-list>
-            <plex-item *ngFor="let turno of bloque.turnos">
-                <img src="{{ turno.paciente.foto}}" alt="">
-                <plex-label titulo="{{ turno.paciente.nombre }} {{ turno.paciente.apellido }}"
-                            subtitulo="{{ turno.paciente.documento }}">
-                </plex-label>
-                <plex-label titulo="{{ turno.paciente.fechaNacimiento }}" subtitulo="{{ turno.paciente.alias }}">
-                </plex-label>
-                <plex-badge type="success" size="sm">validado</plex-badge>
-                <plex-badge type="info" size="sm">{{ turno.paciente.sexo }}</plex-badge>
-                <plex-button type="success" size="sm" title="dar turno" icon="turno-tilde-bold"
-                             (click)="selected(agenda)"></plex-button>
-                <plex-button type="info" size="sm" title="solicitudes" icon="import"></plex-button>
-                <plex-button type="info" size="sm" title="activar app" icon="celular"></plex-button>
-                <plex-button type="warning" size="sm" title="editar" icon="pencil"></plex-button>
-            </plex-item>
-        </plex-list>
-    </ng-container>
-</ng-container>
-<plex-title titulo="Turnos frecuentes" size="sm"></plex-title>
+<input class="w-100" type="text" [(ngModel)]="searchTerm" [ngModelOptions]=" {standalone: true}"
+       placeholder="Buscar o filtrar pacientes" (keydown)="showPacientes()" />
+<div *ngIf="valor === true" class="h-75" justify="center">
+    <plex-label (eventoValor)="recibirValor($event)" size="lg" icon="information-variant" direction="column"
+                titulo="Comience seleccionando un paciente" subtitulo="podrá visualizar sus datos y asignarle un turno">
+    </plex-label>
+</div>
+<plex-list height="75%" *ngIf="valor === false">
+    <plex-item *ngFor="let paciente of pacientes$ | async | pacientesFilter: searchTerm" (click)="selected(paciente)"
+               [selected]="selectedId === paciente.id">
+        <plex-badge type="info">{{ paciente.sexo }}</plex-badge>
+        <plex-badge type="info">{{ paciente.fechaNacimiento }}</plex-badge>
+        <plex-button type="success" size="sm" icon="turno-mas"></plex-button>
+        <img src="{{ paciente.foto }}" alt="">
+
+        <plex-label size="md" titulo="{{ paciente.nombre }} {{ paciente.apellido }}"
+                    subtitulo="{{ paciente.documento }}"></plex-label>
+
+        <plex-button type="warning" size="sm" icon="pencil"></plex-button>
+        <plex-button type="info" size="sm" icon="information-variant"></plex-button>
+        <plex-button type="danger" size="sm" icon="turno-menos"></plex-button>
+    </plex-item>
+</plex-list>

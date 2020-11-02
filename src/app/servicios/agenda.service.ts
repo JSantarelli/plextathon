@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { IAgenda } from './../modelos/turnos/IAgenda';
-import { AGENDAS } from './../data/data-agendas';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AGENDAS } from './../mock-data/mock-agendas';
+import { IAgenda } from '../modelos/turnos/IAgenda';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class AgendaService {
+
+    private proSource = new BehaviorSubject<string>('nombre del profesional');
+    currentValor = this.proSource.asObservable();
 
     getAgendas(): Observable<IAgenda[]> {
         return of(AGENDAS);

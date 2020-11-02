@@ -1,10 +1,20 @@
 import { Component, OnInit, ContentChild } from '@angular/core';
-import { AgendaService } from './../../servicios/agenda.service';
-import { IAgenda } from './../../modelos/turnos/IAgenda';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
+import { NgForm, FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
-//import { PlexOptionsComponent } from './lib/options/options.component';
+import { Observable } from 'rxjs';
+
+// Servicio
+import { TurnoService } from './../../servicios/turno.service';
+import { AgendaService } from './../../servicios/agenda.service';
+import { PacienteService } from './../../servicios/paciente.service';
+
+
+// Modelo
+import { IAgenda } from './../../modelos/turnos/IAgenda';
+import { ListadoTurnosComponent } from '../../citas/listado-turnos/listado-turnos.component';
+import { ITurno } from 'src/app/modelos/turnos/ITurno';
+import { IPaciente } from 'src/app/modelos/turnos/IPaciente';
 
 @Component({
     selector: 'dacion-turno',
@@ -13,186 +23,102 @@ import { switchMap } from 'rxjs/operators';
 })
 export class DacionTurnoComponent implements OnInit {
 
-    //@ContentChild(PlexOptionsComponent, { static: true }) plexOptions: PlexOptionsComponent;
+    childForm;
+    agendas$: Observable<IAgenda>;
+    turnos$: Observable<ITurno>;
+    pacientes$: Observable<IPaciente>;
+    profesional: string;
+    valor: boolean;
+    nota: boolean = false;
 
-    public listadoAgenda: IAgenda[];
-    agenda$: Observable<IAgenda>;
+    // Binding modulos e insercion en Firebase
+    organizacionList: IAgenda[];
+    editar = ListadoTurnosComponent;
+    organizacionSeleccionada = null;
 
-    agendas$: Observable<IAgenda[]>;
-    selectedId: string;
+    organizacionForm = new FormGroup({
+        '$key': new FormControl(),
+        'motivo': new FormControl(),
+        'nota': new FormControl(),
+        'profesionales': new FormControl(),
+    })
 
-    public items = [
-        {
-            label: 'opcion 1',
-            key: '1',
-        },
-        {
-            label: 'opcion 2',
-            key: '2',
-        },
-        {
-            label: 'opcion 3',
-            key: '3',
-        }
-    ];
-
-    public horarios = [
-        {
-            hora: '07:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '07:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '07:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '08:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '08:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '08:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '09:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '09:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '09:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '10:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '10:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '10:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '11:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '11:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '11:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '12:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '12:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '12:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '13:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '13:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '13:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '14:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '14:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '14:40',
-            turnoDoble: false,
-        },
-        {
-            hora: '15:00',
-            turnoDoble: false,
-        },
-        {
-            hora: '15:20',
-            turnoDoble: false,
-        },
-        {
-            hora: '15:40',
-            turnoDoble: false,
-        },
-    ];
-
-    public viewOptions = true;
-    public selectedOption = '1';
+    searchTerm: string;
 
     constructor(
-        private agendaService: AgendaService,
+        private turnoService: TurnoService,
+        private pacienteService: PacienteService,
+        private data: PacienteService,
+        private pro: AgendaService,
         private route: ActivatedRoute,
-        private router: Router,
+        private parentF: FormGroupDirective,
+        private agendaService: AgendaService
     ) { }
 
 
-    ngOnInit(): void {
+    ngOnInit() {
 
-        this.agendas$ = this.agendaService.getAgendas();
-
-        this.agenda$ = this.route.paramMap.pipe(
+        this.pacientes$ = this.route.paramMap.pipe(
             switchMap((params: ParamMap) =>
-                this.agendaService.getAgenda(params.get('id')))
+                this.pacienteService.getPaciente(params.get('id')))
         );
+
+        // Recepción de valor para eliminar plex-label
+        this.data.currentValor.subscribe(valor => this.valor = valor)
+        this.pro.currentValor.subscribe(profesional => this.profesional = profesional)
+
+        this.resetForm();
+
+        this.turnoService.getTurnos()
+            .snapshotChanges()
+            .subscribe(Item => {
+                this.organizacionList = [];
+                Item.forEach(element => {
+                    let x = element.payload.toJSON();
+                    x["$key"] = element.key;
+                    this.organizacionList.push(x as IAgenda);
+                })
+            })
+
     }
 
-    selected(agenda) {
-        this.selectedId = agenda.id;
-        this.router.navigate(['', this.selectedId]);
+    recibirValor($event) {
+        this.valor = $event;
     }
 
-    selectedBloque(agenda) {
-        this.selectedId = agenda.id;
-        agenda.selected = !agenda.selected
-        this.router.navigate(['', this.selectedId]);
+    recibirProfesional($event) {
+        this.profesional = $event;
+        console.log(this.profesional)
     }
 
-    gotoAgendas(agenda: IAgenda) {
-        const agendaId = agenda ? agenda.id : null;
-        this.router.navigate(['/citas', { id: agendaId }]);
+    mostrarNota() {
+        this.nota = !this.nota;
     }
 
-    toggleItems() {
-        if (this.items.length === 2) {
-            this.items.push({ label: 'opcion 3', key: '3' });
-        } else {
-            this.items = this.items.filter(item => item.key !== '3');
-            this.items = [
-                { label: 'otras 1', key: '7' },
-                { label: 'otas 2', key: '8' },
-            ];
+    onSubmit(organizacionForm: NgForm) {
+        if (organizacionForm.value.$key == null)
+            this.turnoService.insertOrganizacion(organizacionForm.value)
+        else
+            this.turnoService.updateOrganizacion(organizacionForm.value);
+
+        this.resetForm(organizacionForm);
+    }
+
+    resetForm(organizacionForm?: NgForm) {
+        if (organizacionForm != null)
+            organizacionForm.reset();
+        this.turnoService.selectedOrganizacion = new IAgenda();
+    }
+
+    onEdit(organizacion: IAgenda) {
+        this.turnoService.selectedOrganizacion = Object.assign({}, organizacion);
+    }
+
+    onDelete($key: string) {
+        var answer = confirm('Desea eliminar este efector');
+        console.log(answer);
+        if (answer) {
+            this.turnoService.deleteOrganizacion($key);
         }
     }
-
 }

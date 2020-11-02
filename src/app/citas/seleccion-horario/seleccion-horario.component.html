@@ -1,0 +1,12 @@
+<!-- Item activo con ngStyle -->
+<plex-grid type="full" cols="4">
+    <ng-container *ngFor="let horario of organizacionService.horarios">
+        <label>
+            <input type="radio" name="{{ horario.hora }}" formControlName="{{ horario.hora }}" value="horario">
+            <plex-card align="center" type="dark" size="sm" [selected]="horario.selected"
+                       (click)="horario.selected = !horario.selected">
+                <plex-label type="" titulo="{{ horario.hora }}" subtitulo="{{ horario.horario }}"></plex-label>
+            </plex-card>
+        </label>
+    </ng-container>
+</plex-grid>

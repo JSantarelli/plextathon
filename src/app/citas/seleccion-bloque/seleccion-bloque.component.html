@@ -1,0 +1,14 @@
+<!-- bloques -->
+<plex-grid type="full" size="sm" *ngIf="agendas$ | async as agenda">
+    <plex-card type="dark" *ngFor="let bloque of agenda.bloques; let i = index">
+        <!--<input type="checkbox" formControlName="bloques" name="bloques">-->
+        <input type="checkbox">
+        <!--<plex-label titulo="{{ agenda.id }}" subtitulo=""></plex-label>-->
+        <plex-badge type="success">{{ bloque.restantesGestion }} turnos disponibles</plex-badge>
+        <plex-label titulo="{{ bloque.horaInicio }} - {{ bloque.horaFin }}" subtitulo=""></plex-label>
+
+        <plex-label *ngFor="let profesional of agenda.profesionales; let i = index"
+                    titulo="{{ profesional.apellido }}, {{ profesional.nombre }}" subtitulo="{{ profesional.id  }}">
+        </plex-label>
+    </plex-card>
+</plex-grid>

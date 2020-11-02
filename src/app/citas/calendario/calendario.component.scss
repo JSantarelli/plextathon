@@ -1,0 +1,58 @@
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat( 7, minmax(100px, 1fr) );
+
+    %baseTable {
+        border-collapse: collapse;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+}
+
+div {
+    @extend %baseTable;
+    text-transform: uppercase;
+    //border: solid 1px lightslategrey;
+
+    h5 {
+        font-size: 1vw;
+    }
+
+    &:first-child {
+        height: 5vh;
+    }
+
+}
+
+ul, li, td, tr {
+    padding: 0!important;
+    margin: 0!important;
+    list-style: none!important;
+}
+
+table {
+    width: 100%;
+
+
+    }
+    
+    th {
+        @extend %baseTable;
+    }
+    
+    td {
+        @extend %baseTable;
+        //border: solid 1px lightslategrey;
+        height: 11.5vh;
+    
+        //&:hover {
+        //    box-shadow: inset 0 0 0 2px skyblue;
+        //    background-color: lightskyblue !important;
+        //    color: black;
+        //    box-sizing: border-box;
+        //    cursor: pointer;
+        //}
+    
+    }
+}

@@ -1,49 +1,62 @@
-<plex-title titulo="dar turno" size="sm"></plex-title>
-<ng-container *ngIf="agenda$ | async as agenda">
+<plex-title titulo="dar turno" size="md">
+    <plex-button label="cambiar de agenda" size="sm" type="warning"></plex-button>
+    <plex-button class="ml-2" icon="account-search" size="sm" type="info" routerLink="/busqueda-paciente">
+    </plex-button>
+</plex-title>
 
-    <!-- Agendas disponibles -->
-    <plex-grid type="auto" size="md" cols="3">
-        <ng-container *ngFor="let bloque of agenda.bloques" type="info">
-            <plex-card align="start" type="dark" size="sm" *ngFor="let prestacion of bloque.tipoPrestaciones"
-                       [selected]="bloque.selected" (click)="selectedBloque(bloque)">
-                <plex-badge type="warning">{{ bloque.cantidadTurnos }} / {{ bloque.restantesDelDia }}</plex-badge>
-                <plex-label size="md" direction="row" titulo="{{ agenda.horaInicio }}"
-                            subtitulo="{{ prestacion.nombre }}">
-                </plex-label>
-                <plex-button type="warning" label="modificar" size="sm"></plex-button>
-            </plex-card>
-        </ng-container>
-    </plex-grid>
+<section id="altaImplementacion" class="h-100 d-flex flex-column justify-content-between">
+    <div *ngIf="valor === true" class="h-25" justify="center">
+        <plex-label (eventoValor)="recibirValor($event)" size=" md" icon="information-variant" direction="column"
+                    titulo="Comience seleccionando un paciente"
+                    subtitulo="podrá visualizar sus datos y asignarle un turno">
+        </plex-label>
 
-    <!-- Info paciente (agregar selectedPaciente)-->
-    <ng-container *ngFor="let bloque of agenda.bloques | slice:0:1" type="info">
-        <plex-detail *ngFor="let turno of bloque.turnos | slice:0:1" size="sm" direction="row">
-            <plex-badge size="xs">{{ agenda.id }}</plex-badge>
-            <plex-badge type="info" size="sm">{{ turno.paciente.sexo }}</plex-badge>
-            <img src="{{ turno.paciente.foto}}" alt="">
-            <div title>{{ turno.paciente.nombre }} {{ turno.paciente.apellido }}</div>
-            <plex-label size="sm" titulo="Obra social" subtitulo="{{ turno.paciente.obraSocial.nombre }}"></plex-label>
-            <plex-label size="sm" titulo="Telefono" subtitulo="{{ turno.paciente.telefono }}"></plex-label>
-            <plex-label size="sm" titulo="Telefono" subtitulo="{{ turno.paciente.telefono }}"></plex-label>
-            <plex-label size="sm" titulo="Telefono" subtitulo="{{ agenda.id }}"></plex-label>
-        </plex-detail>
-    </ng-container>
+    </div>
 
-    <!-- Info adicional -->
-    <plex-title titulo="información adicional" size="sm"></plex-title>
-    <plex-text [(ngModel)]="templateModel2" placeholder="Escriba el motivo por el cual paciente ha solicitado un turno">
-    </plex-text>
+    <plex-detail *ngIf="pacientes$ | async as paciente">
+        <img src="{{ paciente.foto }}" alt="">
+        <div title>{{ paciente.nombre }} {{ paciente.apellido }}</div>
+        <div subtitle>{{ paciente.documento }}</div>
+        <plex-badge type="info">{{ paciente.sexo }}</plex-badge>
+        <plex-badge type="info">{{ paciente.fechaNacimiento }}</plex-badge>
+    </plex-detail>
+    <form [formGroup]="organizacionForm" (ngSubmit)="onSubmit(organizacionForm)">
 
-    <!-- Horarios -->
-    <plex-title titulo="selección horario" size="sm"></plex-title>
-    <section class="h-25">
-        <plex-grid type="full" size="md" cols="3">
-            <plex-card align="center" type="dark" size="sm" *ngFor="let horario of horarios"
-                       [selected]="horario.selected" (click)="horario.selected = !horario.selected">
-                <plex-label size="md" direction="row" titulo="{{ horario.hora }}">
-                </plex-label>
-            </plex-card>
-        </plex-grid>
-    </section>
+        <!-- Prestacion/Profesional -->
+        <input type="hidden" (eventoProfesional)="recibirProfesional($event)" formControlName="profesionales"
+               name="profesionales">
 
-</ng-container>
+        <!-- Seleccion bloque -->
+        <seleccion-bloque></seleccion-bloque>
+
+        <hr class="w-100">
+        <input type="hidden" formControlName="$key" name="$key">
+
+        <plex-title titulo="información adicional" size="sm">
+            <plex-button label="agregar nota" size="sm" type="info" (click)="mostrarNota()"></plex-button>
+        </plex-title>
+
+        <!-- Motivo de consulta -->
+        <plex-text label="Motivo de consulta/diagnóstico" size="md" formControlName="motivo" name="motivo"
+                   placeholder="Escriba el motivo por el cuál el paciente solicita el turno"></plex-text>
+
+        <!-- Nota -->
+        <plex-text *ngIf="valor === nota" label="Nota adicional" size="md" formControlName="nota" name="nota"
+                   multiline="true" placeholder="Escriba alguna descripción o nota extra"></plex-text>
+
+        <div>{{ organizacionForm.value | json }}</div>
+
+        <!-- Seleccion horario -->
+        <seleccion-horario>
+
+        </seleccion-horario>
+        <!--<input type="date" formControlName="fecha" name="fecha">-->
+        <!--<plex-text id="capacitados" formControlName="capacitados" name="capacitados">-->
+    </form>
+    <div justify class="h-25">
+        <plex-button type="danger" size="md" class="reset" (click)="resetForm(organizacionForm)">No dar turno
+        </plex-button>
+        <plex-button type="success" size="md" class="submit" (click)="onSubmit(organizacionForm)">Confirmar turno
+        </plex-button>
+    </div>
+</section>

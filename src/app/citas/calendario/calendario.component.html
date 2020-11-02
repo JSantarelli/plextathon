@@ -1,15 +1,27 @@
-<p>calendario works!</p>
-<plex-card *ngFor="let agenda of agendas$ | async" class="" [selected]="selectedId === agenda.id">
-    <plex-label titulo="{{ agenda.id }}" subtitulo="{{ agenda.horaInicio }}">
-    </plex-label>
+<!-- Posteriormente se extiende el componente grid -->
+<section class="calendar-grid">
+    <ng-container *ngFor="let dia of semana">
+        <div>
+            <h5>{{ dia.nombre }}</h5>
+        </div>
+    </ng-container>
+    <ng-container *ngFor="let dia of mes; let i of index">
+        <plex-card size="sm" (click)="selected(agenda)" *ngFor="let agenda of agendas$ | async"
+                   [selected]="selectedId === agenda.id">
+            <!--<plex-card class="" [routerLink]="[{ outlets: { home: ['home'] } }]">-->
+            <plex-label size="xl" align="center" titulo="{{ dia.fecha}}" subtitulo="prestacion">
+            </plex-label>
 
-    <plex-button type="info" size="sm" title="ver detalle" icon="eye" (click)="selected(agenda)">
-    </plex-button>
-    <plex-label *ngFor="let profesional of agenda.profesionales" titulo="{{ agenda.tipoPrestaciones }}"
-                subtitulo="Profesional: {{ profesional.apellido }}, {{ profesional.nombre }}">
-    </plex-label>
-    <plex-badge type="success">{{ agenda.estado }}</plex-badge>
-    <plex-badge *ngFor="let bloque of agenda.bloques" type="info">Pacientes
-        {{ bloque.restantesDelDia }}/{{ bloque.accesoDirectoDelDia }}
-    </plex-badge>
-</plex-card>
+            <!--<plex-label *ngFor="let profesional of agenda.profesionales" titulo="{{ agenda.tipoPrestaciones }}"
+                            subtitulo="Profesional: {{ profesional.apellido }}, {{ profesional.nombre }}">
+                </plex-label>-->
+            <plex-badge type="success">{{ agenda.horaInicio }}</plex-badge>
+            <plex-badge type="success">{{ agenda.estado }}</plex-badge>
+            <!--<plex-badge *ngFor="let bloque of agenda.bloques" type="info">Pacientes
+                    {{ bloque.restantesDelDia }}/{{ bloque.accesoDirectoDelDia }}
+                </plex-badge>-->
+            <!--<plex-label *ngFor="let profesional of agenda.profesionales" titulo="{{ profesional.nombre }}"
+                                subtitulo="{{ profesional.apellido }}"></plex-label>-->
+        </plex-card>
+    </ng-container>
+</section>

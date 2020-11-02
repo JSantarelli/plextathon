@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AgendaService } from './../servicios/agenda.service';
+import { PacienteService } from './../servicios/paciente.service';
 import { IAgenda } from './../modelos/turnos/IAgenda';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IPaciente } from '../modelos/turnos/IPaciente';
 
 
 @Component({
     selector: 'citas',
     templateUrl: './citas.component.html',
-    styleUrls: ['./citas.component.css']
+    styleUrls: ['./citas.component.scss']
 })
 
 export class CitasComponent implements OnInit {
+
+    @Output() eventoProfesional = new EventEmitter<string>();
+    profesional: string;
+
+    pacientes: Observable<IPaciente[]>;
+    pacientes$: Observable<IPaciente[]>;
     public modelo: any;
     public templateModel2: any;
     public prestaciones: any[];
@@ -25,37 +34,37 @@ export class CitasComponent implements OnInit {
         selectMultiple: null
     };
 
-    constructor(private service: AgendaService, private router: Router) {
+    constructor(
+        private service: AgendaService,
+        private pacienteService: PacienteService,
+        private router: Router) {
 
     }
 
 
     ngOnInit() {
+        this.pacientes$ = this.pacienteService.getPacientes();
+
         // plex-select
         this.prestaciones = [{
             id: 1,
-            nombre: 'Hospital "Dr. Horacio Heller',
-            continente: 'Zona metro',
+            nombre: 'Consulta general de medicina',
         },
         {
             id: 2,
-            nombre: 'Hospital Bouquet Roldán',
-            continente: 'Zona metro',
+            nombre: 'Consulta de niño sano',
         },
         {
             id: 3,
-            nombre: 'Hospital San Martín de los Andes "Dr. Ramón Carrillo"',
-            continente: 'Zona tres',
+            nombre: 'Exámen médico del adulto"',
         },
         {
             id: 4,
-            nombre: 'Hospital Centenario',
-            continente: 'Zona metro',
+            nombre: 'Consulta de psicología',
         },
         {
             id: 5,
-            nombre: 'Hospital Provincial Neuquen "Dr. Eduardo Castro Rendón"',
-            continente: 'Zona metro',
+            nombre: 'Consulta pediátrica de neurología',
         }
         ];
 
@@ -78,7 +87,7 @@ export class CitasComponent implements OnInit {
         },
         {
             id: 5,
-            nombre: 'Hospital Provincial Neuquen "Dr. Eduardo Castro Rendón"',
+            nombre: 'Cifuentes, Mónica Patricia',
         }
         ];
 
@@ -93,40 +102,11 @@ export class CitasComponent implements OnInit {
 
     }
 
-    // Desacoplar
-    calendario = [
-        { fecha: '1', turnos: '5 turnos' },
-        { fecha: '2', turnos: '5 turnos' },
-        { fecha: '3', turnos: '5 turnos' },
-        { fecha: '4', turnos: '5 turnos' },
-        { fecha: '5', turnos: '5 turnos' },
-        { fecha: '6', turnos: '5 turnos' },
-        { fecha: '7', turnos: '5 turnos' },
-        { fecha: '8', turnos: '5 turnos' },
-        { fecha: '9', turnos: '5 turnos' },
-        { fecha: '10', turnos: 'sin turnos' },
-        { fecha: '11', turnos: 'sin turnos' },
-        { fecha: '12', turnos: 'sin turnos' },
-        { fecha: '13', turnos: 'sin turnos' },
-        { fecha: '14', turnos: 'sin turnos' },
-        { fecha: '15', turnos: 'sin turnos' },
-        { fecha: '16', turnos: 'sin turnos' },
-        { fecha: '17', turnos: '11 turnos' },
-        { fecha: '18', turnos: '11 turnos' },
-        { fecha: '19', turnos: '11 turnos' },
-        { fecha: '20', turnos: '11 turnos' },
-        { fecha: '21', turnos: '11 turnos' },
-        { fecha: '22', turnos: '11 turnos' },
-        { fecha: '23', turnos: 'sin turnos' },
-        { fecha: '24', turnos: 'sin turnos' },
-        { fecha: '25', turnos: 'sin turnos' },
-        { fecha: '26', turnos: 'sin turnos' },
-        { fecha: '27', turnos: 'sin turnos' },
-        { fecha: '28', turnos: 'sin turnos' },
-        { fecha: '29', turnos: 'sin turnos' },
-        { fecha: '30', turnos: 'sin turnos' },
-        { fecha: '31', turnos: 'sin turnos' },
-    ];
+
+    enviarProfesional() {
+        this.eventoProfesional.emit(this.profesional);
+        console.log(this.profesional);
+    }
 
     goToBusqueda() {
         this.router.navigate(['/busqueda-paciente']);
@@ -134,6 +114,11 @@ export class CitasComponent implements OnInit {
 
     goToConfirm() {
         this.router.navigate(['/confirmacion-turno']);
+    }
+
+    selected() {
+        this.router.navigate([{ outlets: { listado: ['pacientes'] } }],);
+
     }
 }
 
