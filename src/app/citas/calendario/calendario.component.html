@@ -9,14 +9,14 @@
         <plex-card size="sm" (click)="selected(agenda)" *ngFor="let agenda of agendas$ | async"
                    [selected]="selectedId === agenda.id">
             <!--<plex-card class="" [routerLink]="[{ outlets: { home: ['home'] } }]">-->
-            <plex-label size="xl" align="center" titulo="{{ dia.fecha}}" subtitulo="prestacion">
+            <plex-label size="xl" align="center" titulo="{{ dia.fecha}}" subtitulo="">
             </plex-label>
 
             <!--<plex-label *ngFor="let profesional of agenda.profesionales" titulo="{{ agenda.tipoPrestaciones }}"
                             subtitulo="Profesional: {{ profesional.apellido }}, {{ profesional.nombre }}">
                 </plex-label>-->
             <plex-badge type="success">{{ agenda.horaInicio }}</plex-badge>
-            <plex-badge type="success">{{ agenda.estado }}</plex-badge>
+            <!--<plex-badge type="success">{{ agenda.estado }}</plex-badge>-->
             <!--<plex-badge *ngFor="let bloque of agenda.bloques" type="info">Pacientes
                     {{ bloque.restantesDelDia }}/{{ bloque.accesoDirectoDelDia }}
                 </plex-badge>-->

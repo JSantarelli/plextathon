@@ -9,14 +9,14 @@
             </plex-button>
         </plex-title>
         <plex-wrapper>
-            <div class="w-25">
+            <!--<div class="w-25">
                 <label>Test paciente</label>
                 <select name="paciente" (click)="enviarProfesional()">
                     <option *ngFor="let paciente of pacientes$ | async" [ngValue]="paciente">
                         {{ paciente.nombre }}
                     </option>
                 </select>
-            </div>
+            </div>-->
             <plex-select [(ngModel)]="modelo1.select" placeholder="Ingrese..." label="Tipo prestación">
             </plex-select>
             <plex-select [(ngModel)]="modelo2.select" placeholder="Ingrese..." label="Equipo médico"></plex-select>
